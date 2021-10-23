@@ -1,5 +1,7 @@
 package com.leszko.calculator;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,12 +20,22 @@ public class Calculation {
 
 	private String result;
 
+	private String sum;
+
+	private Timestamp createdAt;
+
 	protected Calculation() {
 	}
 
-	public Calculation(String a, String b, String result) {
+	public Calculation(String a, String b, String sum, Timestamp createdAt) {
 		this.a = a;
 		this.b = b;
-		this.result = result;
+		this.sum = sum;
+		this.result = sum;
+		this.createdAt = createdAt;
+	}
+
+	public String getSum() {
+		return sum != null ? sum : result;
 	}
 }
