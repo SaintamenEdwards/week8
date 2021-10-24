@@ -38,20 +38,26 @@ public class StepDefinitions {
     
     //Division test    
     
+    private RestTemplate restTemplate2 = new RestTemplate();
+
+    private String a2;
+    private String b2;
+    private String result2;
+    
     @Given("^I have two more numbers: (.*) and (.*)$")
-    public void i_have_two_more_numbers(String a, String b) throws Throwable {
+    public void i_have_two_more_numbers(String a2, String b2) throws Throwable {
         this.a = a;
         this.b = b;
     }
 
     @When("^the calculator divides them$")
     public void the_calculator_divides_them() throws Throwable {
-        String url = String.format("%s/div?a=%s&b=%s", server, a, b);
+        String url = String.format("%s/div?a=%s&b=%s", server, a2, b2);
         result = restTemplate.getForObject(url, String.class);
     }
 
     @Then("^I receive (.*) as a result$")
     public void i_receive_as_another_result(String expectedResult) throws Throwable {
-        assertEquals(expectedResult, result);
+        assertEquals(expectedResult, result2);
     }
 }
