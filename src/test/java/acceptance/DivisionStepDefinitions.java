@@ -19,8 +19,8 @@ public class DivisionStepDefinitions {
 
     @Given("^I have two more numbers: (.*) and (.*)$")
     public void i_have_two_more_numbers(String c, String d) throws Throwable {
-        this.a = c;
-        this.b = d;
+        this.c = c;
+        this.d = d;
     }
 
     @When("^the calculator divides them$")
