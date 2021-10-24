@@ -11,26 +11,26 @@ import static org.junit.Assert.assertEquals;
 public class DivisionStepDefinitions {
     private String server = System.getProperty("calculator.url");
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private RestTemplate restTemplate2 = new RestTemplate();
 
-    private String a;
-    private String b;
-    private String result;
+    private String c;
+    private String d;
+    private String result2;
 
     @Given("^I have two more numbers: (.*) and (.*)$")
-    public void i_have_two_more_numbers(String a, String b) throws Throwable {
-        this.a = a;
-        this.b = b;
+    public void i_have_two_more_numbers(String c, String d) throws Throwable {
+        this.a = c;
+        this.b = d;
     }
 
     @When("^the calculator divides them$")
     public void the_calculator_divs_them() throws Throwable {
-        String url = String.format("%s/div?a=%s&b=%s", server, a, b);
-        result = restTemplate.getForObject(url, String.class);
+        String url = String.format("%s/div?a=%s&b=%s", server, c, d);
+        result2 = restTemplate2.getForObject(url, String.class);
     }
 
     @Then("^I receive (.*) as another result$")
-    public void i_receive_as_aanother_result(String expectedResult) throws Throwable {
-        assertEquals(expectedResult, result);
+    public void i_receive_as_another_result(String expectedResult2) throws Throwable {
+        assertEquals(expectedResult2, result2);
     }
 }
