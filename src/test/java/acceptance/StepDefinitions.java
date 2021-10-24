@@ -46,18 +46,18 @@ public class StepDefinitions {
     
     @Given("^I have two more numbers: (.*) and (.*)$")
     public void i_have_two_more_numbers(String a2, String b2) throws Throwable {
-        this.a = a;
-        this.b = b;
+        this.a = a2;
+        this.b = b2;
     }
 
     @When("^the calculator divides them$")
     public void the_calculator_divides_them() throws Throwable {
         String url = String.format("%s/div?a=%s&b=%s", server, a2, b2);
-        result = restTemplate.getForObject(url, String.class);
+        result2 = restTemplate2.getForObject(url, String.class);
     }
 
     @Then("^I receive (.*) as a result$")
-    public void i_receive_as_another_result(String expectedResult) throws Throwable {
-        assertEquals(expectedResult, result2);
+    public void i_receive_as_another_result(String expectedResult2) throws Throwable {
+        assertEquals(expectedResult2, result2);
     }
 }
