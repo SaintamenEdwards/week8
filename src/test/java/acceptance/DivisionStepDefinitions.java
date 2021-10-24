@@ -17,8 +17,8 @@ public class DivisionStepDefinitions {
     private String b;
     private String result;
 
-    @Given("^I have two numbers: (.*) and (.*)$")
-    public void i_have_two_numbers(String a, String b) throws Throwable {
+    @Given("^I have two more numbers: (.*) and (.*)$")
+    public void i_have_two_more_numbers(String a, String b) throws Throwable {
         this.a = a;
         this.b = b;
     }
@@ -29,8 +29,8 @@ public class DivisionStepDefinitions {
         result = restTemplate.getForObject(url, String.class);
     }
 
-    @Then("^I receive (.*) as a result$")
-    public void i_receive_as_a_result(String expectedResult) throws Throwable {
+    @Then("^I receive (.*) as another result$")
+    public void i_receive_as_aanother_result(String expectedResult) throws Throwable {
         assertEquals(expectedResult, result);
     }
 }
