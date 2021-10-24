@@ -38,8 +38,8 @@ public class StepDefinitions {
     
     //Division test    
     
-    @Given("^I have two numbers: (.*) and (.*)$")
-    public void i_have_two_numbers(String a, String b) throws Throwable {
+    @Given("^I have two more numbers: (.*) and (.*)$")
+    public void i_have_two_more_numbers(String a, String b) throws Throwable {
         this.a = a;
         this.b = b;
     }
@@ -51,7 +51,7 @@ public class StepDefinitions {
     }
 
     @Then("^I receive (.*) as a result$")
-    public void i_receive_as_a_result(String expectedResult) throws Throwable {
+    public void i_receive_as_another_result(String expectedResult) throws Throwable {
         assertEquals(expectedResult, result);
     }
 }
