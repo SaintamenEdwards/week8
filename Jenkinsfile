@@ -3,11 +3,8 @@ podTemplate(yaml: '''
     kind: Pod 
     spec: 
       containers:  
-      - name: centos 
-        image: centos 
-        env:  
-        - name: CALCIP 
-          value: 10.1.0.216 
+      - name: gradle 
+        image: gradle:jdk8 
         command: 
         - sleep 
         args: 
@@ -15,15 +12,14 @@ podTemplate(yaml: '''
       restartPolicy: Never 
 ''') { 
      node(POD_LABEL) { 
-          stage('k8s') { 
-               git 'https://github.com/KatieLuna/week8.git' 
-               container('centos') { 
+          stage('gradle') { 
+               git 'https://github.com/SaintamenEdwards/week8.git' 
+               container('gradle') { 
                     stage('start calculator') { 
                          sh ''' 
-                         CALCIP=10.1.0.216
-                         chmod +x acceptance-test.sh
+                         cd week8
                          chmod +x gradlew
-                         ./gradlew acceptanceTest -Dcalculator.url=http://$CALCIP:8080 
+                         ./gradlew acceptanceTest -Dcalculator.url=http://calculator-service:8080 
                          ''' 
                     } 
 
