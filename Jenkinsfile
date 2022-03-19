@@ -17,9 +17,8 @@ podTemplate(yaml: '''
                container('gradle') { 
                     stage('start calculator') { 
                          sh ''' 
-                         chmod +x acceptance-test.sh && ./acceptance-test.sh
-                         chmod +x gradlew
-                         ./gradlew acceptanceTest -Dcalculator.url=http://calculator-service:8080 
+                         curl -ik -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)"
+                         https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/default/pods
                          ''' 
                     } 
                } 
