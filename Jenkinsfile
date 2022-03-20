@@ -1,46 +1,32 @@
-pipeline {
-    agent {
-        kubernetes {
-            yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  securityContext:
-    runAsUser: 0
-  containers:
-  - name: gradle
-    image: gradle:jdk8
-    command:
-    - sleep
-    args:
-    - 30d
-  restartPolicy: Never
-            '''
-        }
-    }
-    environment {
-        CALCIP = "10.101.99.235"
-    }
-    stages {
-        stage('Acceptance Test') {
-            steps {
-                sh '''
-                echo $CALCIP
-                chmod +x gradlew
-                ./gradlew acceptanceTest -Dcalculator.url=http://$CALCIP:8080
-                '''
-            }
-            post {
-                always {
-                    publishHTML (target: [ 
-                        allowMissing: false,
-                        alwaysLinkToLastBuild: false,
-                        reportDir: './build/reports/tests/acceptanceTest', 
-                        reportFiles: 'index.html', 
-                        reportName: "Acceptance Test Report" 
-                    ])
-                }
-            }
-        }
-    }
-}
+podTemplate(yaml: ''' 
+    apiVersion: v1 
+    kind: Pod 
+    spec: 
+      containers:  
+      - name: centos 
+        image: centos 
+        env:  
+        - name: CALCIP 
+          value: 10.101.99.235 
+        command: 
+        - sleep 
+        args: 
+        - 99d 
+      restartPolicy: Never 
+''') { 
+     node(POD_LABEL) { 
+          stage('k8s') { 
+               git 'https://github.com/SaintamenEdwards/week8.git' 
+               container('centos') { 
+                    stage('start calculator') { 
+                         sh ''' 
+                         CALCIP=10.101.99.235
+                         chmod +x acceptance-test.sh
+                         chmod +x gradlew
+                         ./gradlew acceptanceTest -Dcalculator.url=http://$CALCIP:8080 
+                         ''' 
+                    } 
+
+               } 
+          } 
+     } 
