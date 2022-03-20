@@ -30,7 +30,7 @@ podTemplate(yaml: '''
                     '''
                 }
                 stage('test calculator') {
-                    sh test $(curl calculator-service:8080/sum?a=1\\&b=2) -eq 3
+                    sh '''
                     CALCIP=`hostname -i`
                     export CALCIP
                     echo $CALCIP
