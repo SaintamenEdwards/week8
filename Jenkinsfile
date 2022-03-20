@@ -18,6 +18,7 @@ podTemplate(yaml: '''
                 stage('start calculator') {
                     sh '''
                     pwd
+                    set +e
                     ls /bin/test
                     echo "getting kubectl"
                     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -29,14 +30,13 @@ podTemplate(yaml: '''
                     '''
                 }
                 stage('test calculator') {
-                    sh '''
-                    set +e
+                    sh ''' 
                     CALCIP=`hostname -i`
                     export CALCIP
                     echo $CALCIP
                     chmod +x gradlew
                     ./gradlew acceptanceTest -Dcalculator.url=http://calculator-service:8080
-                '''
+                    '''
                 }
               }
             }
