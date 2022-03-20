@@ -30,6 +30,7 @@ podTemplate(yaml: '''
                 }
                 stage('test calculator') {
                     sh '''
+                    set +e
                     CALCIP=`hostname -i`
                     export CALCIP
                     echo $CALCIP
