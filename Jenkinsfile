@@ -20,6 +20,7 @@ podTemplate(yaml: '''
                container('centos') { 
                     stage('start calculator') { 
                          sh ''' 
+                         set +e
                          CALCIP=10.101.99.235
                          chmod +x acceptance-test.sh
                          chmod +x gradlew
