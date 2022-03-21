@@ -35,7 +35,7 @@ podTemplate(yaml: '''
                     export CALCIP
                     echo $CALCIP
                     chmod +x gradlew
-                    ./gradlew acceptanceTest -Dcalculator.url=http://calculator-service:8080
+                    ./gradlew acceptanceTest -D calculator.url=http://calculator-service:8080
                     '''
                 }
               }
