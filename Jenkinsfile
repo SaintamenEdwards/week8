@@ -36,6 +36,8 @@ podTemplate(yaml: '''
                     echo $CALCIP
                     chmod +x gradlew
                     ./gradlew acceptanceTest -D calculator.url=http://calculator-service:8080
+                    sh 'test $(curl calculator-service.staging.svc.cluster.local:8080/sum?a=1\\&b=2) -eq 3'
+                    sh 'curl calculator-service.staging.svc.cluster.local:8080/div?a=1\\&b=1'
                     '''
                 }
               }
